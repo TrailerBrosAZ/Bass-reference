@@ -1,121 +1,121 @@
-  {/* Header */}
-  <div style={{ background: "linear-gradient(135deg, #1a6b3a, #0d4a28)", padding: "14px 16px", borderBottom: "2px solid #2ea843" }}>
-    <div style={{ fontSize: 18, fontWeight: 700 }}>🎣 Arizona Bass Reference</div>
-    <div style={{ fontSize: 11, color: "#8bc4a0", marginTop: 3 }}>Salt River Chain · Saguaro · Canyon · Roosevelt</div>
-  </div>
+{/* Header */}
+<div style={{ background: "linear-gradient(135deg, #1a6b3a, #0d4a28)", padding: "14px 16px", borderBottom: "2px solid #2ea843" }}>
+  <div style={{ fontSize: 18, fontWeight: 700 }}>🎣 Arizona Bass Reference</div>
+  <div style={{ fontSize: 11, color: "#8bc4a0", marginTop: 3 }}>Salt River Chain · Saguaro · Canyon · Roosevelt</div>
+</div>
 
-  {/* Nav */}
-  <div style={{ display: "flex", background: "#161b22", borderBottom: "1px solid #30363d", overflowX: "auto" }}>
-    {tabs.map((t, i) => (
-      <button key={t} onClick={() => setActiveTab(i)} style={{ flex: 1, minWidth: 70, padding: "10px 6px", background: "none", border: "none", borderBottom: `2px solid ${activeTab === i ? "#2ea843" : "transparent"}`, color: activeTab === i ? "#2ea843" : "#8b949e", fontSize: 11, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
-        {t}
-      </button>
-    ))}
-  </div>
+{/* Nav */}
+<div style={{ display: "flex", background: "#161b22", borderBottom: "1px solid #30363d", overflowX: "auto" }}>
+  {tabs.map((t, i) => (
+    <button key={t} onClick={() => setActiveTab(i)} style={{ flex: 1, minWidth: 70, padding: "10px 6px", background: "none", border: "none", borderBottom: `2px solid ${activeTab === i ? "#2ea843" : "transparent"}`, color: activeTab === i ? "#2ea843" : "#8b949e", fontSize: 11, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
+      {t}
+    </button>
+  ))}
+</div>
 
-  <div style={{ padding: 12 }}>
+<div style={{ padding: 12 }}>
 
-    {/* LURES */}
-    {activeTab === 0 && (
-      <div style={{ display: "grid", gap: 10 }}>
-        {lures.map((l, i) => (
-          <div key={l.name} onClick={() => setExpandedLure(expandedLure === i ? null : i)} style={{ background: "#161b22", border: "1px solid #30363d", borderLeft: `4px solid ${l.color}`, borderRadius: 10, padding: 12, cursor: "pointer" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: expandedLure === i ? 8 : 0 }}>
-              <span style={{ fontSize: 15, fontWeight: 700 }}>{l.name}</span>
-              <span style={{ fontSize: 10, padding: "2px 7px", borderRadius: 10, fontWeight: 600, background: l.speedColor, color: l.speedText }}>{l.speed}</span>
+  {/* LURES */}
+  {activeTab === 0 && (
+    <div style={{ display: "grid", gap: 10 }}>
+      {lures.map((l, i) => (
+        <div key={l.name} onClick={() => setExpandedLure(expandedLure === i ? null : i)} style={{ background: "#161b22", border: "1px solid #30363d", borderLeft: `4px solid ${l.color}`, borderRadius: 10, padding: 12, cursor: "pointer" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: expandedLure === i ? 8 : 0 }}>
+            <span style={{ fontSize: 15, fontWeight: 700 }}>{l.name}</span>
+            <span style={{ fontSize: 10, padding: "2px 7px", borderRadius: 10, fontWeight: 600, background: l.speedColor, color: l.speedText }}>{l.speed}</span>
+          </div>
+          {expandedLure === i && (
+            <>
+              <p style={{ fontSize: 12, color: "#8b949e", marginBottom: 8, lineHeight: 1.5 }}>{l.desc}</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                {l.when.map(w => <span key={w} style={{ fontSize: 10, padding: "2px 6px", borderRadius: 6, background: "#1f2d1f", color: "#4caf50" }}>{w}</span>)}
+                {l.where.map(w => <span key={w} style={{ fontSize: 10, padding: "2px 6px", borderRadius: 6, background: "#1a2535", color: "#58a6ff" }}>{w}</span>)}
+              </div>
+            </>
+          )}
+          {expandedLure !== i && <div style={{ fontSize: 11, color: "#8b949e", marginTop: 4 }}>{l.when.slice(0,2).join(" · ")} · {l.where[0]}</div>}
+        </div>
+      ))}
+      <div style={{ background: "#1f2d1f", border: "1px solid #2ea843", borderRadius: 10, padding: 12, fontSize: 12, color: "#8bc4a0", lineHeight: 1.6 }}>
+        <strong style={{ color: "#2ea843" }}>Tap any lure</strong> to expand details and situational tags.
+      </div>
+    </div>
+  )}
+
+  {/* RODS */}
+  {activeTab === 1 && (
+    <div>
+      {rods.map(r => (
+        <div key={r.title} style={{ background: "#161b22", border: "1px solid #30363d", borderRadius: 10, padding: 14, marginBottom: 10 }}>
+          <div style={{ fontSize: 15, fontWeight: 700, color: r.color, marginBottom: 4 }}>{r.title}</div>
+          <div style={{ fontSize: 11, color: "#8b949e", marginBottom: 10 }}>{r.sub}</div>
+          {r.rows.map(([label, val]) => (
+            <div key={label} style={{ display: "flex", justifyContent: "space-between", fontSize: 12, padding: "5px 0", borderBottom: "1px solid #21262d" }}>
+              <span style={{ color: "#8b949e" }}>{label}</span>
+              <span style={{ color: "#e6edf3", fontWeight: 600, textAlign: "right", maxWidth: "60%" }}>{val}</span>
             </div>
-            {expandedLure === i && (
-              <>
-                <p style={{ fontSize: 12, color: "#8b949e", marginBottom: 8, lineHeight: 1.5 }}>{l.desc}</p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
-                  {l.when.map(w => <span key={w} style={{ fontSize: 10, padding: "2px 6px", borderRadius: 6, background: "#1f2d1f", color: "#4caf50" }}>{w}</span>)}
-                  {l.where.map(w => <span key={w} style={{ fontSize: 10, padding: "2px 6px", borderRadius: 6, background: "#1a2535", color: "#58a6ff" }}>{w}</span>)}
-                </div>
-              </>
-            )}
-            {expandedLure !== i && <div style={{ fontSize: 11, color: "#8b949e", marginTop: 4 }}>{l.when.slice(0,2).join(" · ")} · {l.where[0]}</div>}
-          </div>
-        ))}
-        <div style={{ background: "#1f2d1f", border: "1px solid #2ea843", borderRadius: 10, padding: 12, fontSize: 12, color: "#8bc4a0", lineHeight: 1.6 }}>
-          <strong style={{ color: "#2ea843" }}>Tap any lure</strong> to expand details and situational tags.
+          ))}
         </div>
+      ))}
+      <div style={{ background: "#1f2d1f", border: "1px solid #2ea843", borderRadius: 10, padding: 12, fontSize: 12, color: "#8bc4a0", lineHeight: 1.6 }}>
+        <strong style={{ color: "#2ea843" }}>Priority upgrade:</strong> Get your open face rigged with a drop shot as a dedicated finesse setup. At Saguaro in clear cold water, that rod is your most consistent option right now.
       </div>
-    )}
+    </div>
+  )}
 
-    {/* RODS */}
-    {activeTab === 1 && (
-      <div>
-        {rods.map(r => (
-          <div key={r.title} style={{ background: "#161b22", border: "1px solid #30363d", borderRadius: 10, padding: 14, marginBottom: 10 }}>
-            <div style={{ fontSize: 15, fontWeight: 700, color: r.color, marginBottom: 4 }}>{r.title}</div>
-            <div style={{ fontSize: 11, color: "#8b949e", marginBottom: 10 }}>{r.sub}</div>
-            {r.rows.map(([label, val]) => (
-              <div key={label} style={{ display: "flex", justifyContent: "space-between", fontSize: 12, padding: "5px 0", borderBottom: "1px solid #21262d" }}>
-                <span style={{ color: "#8b949e" }}>{label}</span>
-                <span style={{ color: "#e6edf3", fontWeight: 600, textAlign: "right", maxWidth: "60%" }}>{val}</span>
-              </div>
-            ))}
+  {/* CONDITIONS */}
+  {activeTab === 2 && (
+    <div>
+      {conditions.map(c => (
+        <div key={c.title} style={{ background: "#161b22", border: "1px solid #30363d", borderRadius: 10, padding: 12, marginBottom: 10 }}>
+          <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}>
+            <span>{c.icon}</span>{c.title}
           </div>
-        ))}
-        <div style={{ background: "#1f2d1f", border: "1px solid #2ea843", borderRadius: 10, padding: 12, fontSize: 12, color: "#8bc4a0", lineHeight: 1.6 }}>
-          <strong style={{ color: "#2ea843" }}>Priority upgrade:</strong> Get your open face rigged with a drop shot as a dedicated finesse setup. At Saguaro in clear cold water, that rod is your most consistent option right now.
-        </div>
-      </div>
-    )}
-
-    {/* CONDITIONS */}
-    {activeTab === 2 && (
-      <div>
-        {conditions.map(c => (
-          <div key={c.title} style={{ background: "#161b22", border: "1px solid #30363d", borderRadius: 10, padding: 12, marginBottom: 10 }}>
-            <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}>
-              <span>{c.icon}</span>{c.title}
+          {c.items.map(item => (
+            <div key={item} style={{ fontSize: 12, color: "#c9d1d9", padding: "4px 0", borderBottom: "1px solid #21262d", display: "flex", gap: 6 }}>
+              <span style={{ color: "#2ea843", flexShrink: 0 }}>→</span>{item}
             </div>
-            {c.items.map(item => (
-              <div key={item} style={{ fontSize: 12, color: "#c9d1d9", padding: "4px 0", borderBottom: "1px solid #21262d", display: "flex", gap: 6 }}>
-                <span style={{ color: "#2ea843", flexShrink: 0 }}>→</span>{item}
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-    )}
-
-    {/* LAKES */}
-    {activeTab === 3 && (
-      <div>
-        {lakes.map(l => (
-          <div key={l.name} style={{ background: "#161b22", border: "1px solid #30363d", borderTop: `3px solid ${l.color}`, borderRadius: 10, padding: 12, marginBottom: 10 }}>
-            <div style={{ fontSize: 15, fontWeight: 700, color: l.color, marginBottom: 6 }}>{l.name}</div>
-            {l.items.map(item => (
-              <div key={item} style={{ fontSize: 12, color: "#c9d1d9", padding: "3px 0", display: "flex", gap: 6 }}>
-                <span style={{ color: "#f0a500", flexShrink: 0 }}>•</span>{item}
-              </div>
-            ))}
-          </div>
-        ))}
-        <div style={{ background: "#1f2d1f", border: "1px solid #2ea843", borderRadius: 10, padding: 12, fontSize: 12, color: "#8bc4a0", lineHeight: 1.6 }}>
-          <strong style={{ color: "#2ea843" }}>Structure rule:</strong> Fish where cover meets a depth change. A flooded tree on flat bottom is okay. That same tree on a ledge dropping 10 feet is a money spot.
+          ))}
         </div>
-      </div>
-    )}
+      ))}
+    </div>
+  )}
 
-    {/* SEASON */}
-    {activeTab === 4 && (
-      <div>
-        {seasons.map(s => (
-          <div key={s.name} style={{ background: "#161b22", border: "1px solid #30363d", borderRadius: 10, padding: 12, marginBottom: 10 }}>
-            <div style={{ fontSize: 13, fontWeight: 700, color: s.color, marginBottom: 4 }}>{s.name}</div>
-            <div style={{ fontSize: 11, color: "#8b949e", marginBottom: 8 }}>{s.temp}</div>
-            {s.items.map(item => (
-              <div key={item} style={{ fontSize: 12, color: "#c9d1d9", padding: "3px 0", display: "flex", gap: 6 }}>
-                <span style={{ color: "#2ea843", flexShrink: 0 }}>✓</span>{item}
-              </div>
-            ))}
-          </div>
-        ))}
+  {/* LAKES */}
+  {activeTab === 3 && (
+    <div>
+      {lakes.map(l => (
+        <div key={l.name} style={{ background: "#161b22", border: "1px solid #30363d", borderTop: `3px solid ${l.color}`, borderRadius: 10, padding: 12, marginBottom: 10 }}>
+          <div style={{ fontSize: 15, fontWeight: 700, color: l.color, marginBottom: 6 }}>{l.name}</div>
+          {l.items.map(item => (
+            <div key={item} style={{ fontSize: 12, color: "#c9d1d9", padding: "3px 0", display: "flex", gap: 6 }}>
+              <span style={{ color: "#f0a500", flexShrink: 0 }}>•</span>{item}
+            </div>
+          ))}
+        </div>
+      ))}
+      <div style={{ background: "#1f2d1f", border: "1px solid #2ea843", borderRadius: 10, padding: 12, fontSize: 12, color: "#8bc4a0", lineHeight: 1.6 }}>
+        <strong style={{ color: "#2ea843" }}>Structure rule:</strong> Fish where cover meets a depth change. A flooded tree on flat bottom is okay. That same tree on a ledge dropping 10 feet is a money spot.
       </div>
-    )}
+    </div>
+  )}
 
-  </div>
+  {/* SEASON */}
+  {activeTab === 4 && (
+    <div>
+      {seasons.map(s => (
+        <div key={s.name} style={{ background: "#161b22", border: "1px solid #30363d", borderRadius: 10, padding: 12, marginBottom: 10 }}>
+          <div style={{ fontSize: 13, fontWeight: 700, color: s.color, marginBottom: 4 }}>{s.name}</div>
+          <div style={{ fontSize: 11, color: "#8b949e", marginBottom: 8 }}>{s.temp}</div>
+          {s.items.map(item => (
+            <div key={item} style={{ fontSize: 12, color: "#c9d1d9", padding: "3px 0", display: "flex", gap: 6 }}>
+              <span style={{ color: "#2ea843", flexShrink: 0 }}>✓</span>{item}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  )}
+
+</div>
 </div>
